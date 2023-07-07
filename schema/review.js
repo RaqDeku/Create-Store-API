@@ -1,8 +1,10 @@
+const reviewSchema = {
+  type: "object",
+  properties: {
+    comment: { type: "string" },
+    rating: { type: "number" },
+  },
+  required: ["comment"],
+};
 
-const review = {
-    type: "object",
-    properties: {
-        comment: {type: "string"}
-    },
-    required: ["comment"]
-}
+module.exports = reviewSchema;

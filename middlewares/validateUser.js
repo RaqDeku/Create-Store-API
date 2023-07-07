@@ -14,7 +14,8 @@ const validateUser = async (req, res, next) => {
     try {
       let token = bearerHeader.split(" ")[1];
       let { data } = jwt.verify(token, "yourSecretKey");
-      req.user = await database.findUser(data);
+      let user = await database.findUser(data);
+      req.user = user?._id;
       if (req.user) next();
       else throw new CustomError(401, "Unauthorised! Invalid Access token");
     } catch (error) {

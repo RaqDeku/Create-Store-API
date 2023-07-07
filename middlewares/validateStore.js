@@ -14,8 +14,9 @@ const validateStore = (req, res, next) => {
   try {
     const validate = ajv.compile(storeSchema);
     const valid = validate(data);
-    if (valid) next();
-    else throw new CustomError(400, "Missing Details");
+    let error = validate.errors?.params.missingProperty;
+    if (!valid) throw new CustomError(400, `Missing Detail(s) ${error}`);
+    next();
   } catch (error) {
     next(error);
   }

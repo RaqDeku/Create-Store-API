@@ -9,18 +9,14 @@ class Store {
    */
   async createStore(payload) {
     try {
-      let storeId = await database.createStore({
+      let store = await database.createStore({
         ...payload,
         sales: 0,
       });
-      if (storeId) {
-        let store = await database.getStore(storeId);
-        return store;
-      }
+      return store;
     } catch (error) {
       throw error;
     }
-    return;
   }
 
   async getStore() {}

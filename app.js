@@ -4,7 +4,7 @@ const routes = require("./routes/route");
 
 /**
  * @description Creates Express App
- * @returns Express App Instance
+ * @returns {import('express')} - Express Server Instance
  */
 const createServer = () => {
   const app = express();

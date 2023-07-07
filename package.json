@@ -11,8 +11,10 @@
     "type": "git",
     "url": "git+https://github.com/RaqDeku/Create-Store-API.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "apis"
+  ],
+  "author": "Raquib D. Saabit",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/RaqDeku/Create-Store-API/issues"

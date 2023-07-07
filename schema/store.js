@@ -1,10 +1,10 @@
 const storeSchema = {
   type: "object",
   properties: {
-    name: { type: "string" },
-    description: { type: "string" },
+    storeName: { type: "string" },
+    storeDescription: { type: "string" },
   },
-  required: ["name", "description"],
+  required: ["storeName", "storeDescription"],
 };
 
 module.exports = storeSchema;
