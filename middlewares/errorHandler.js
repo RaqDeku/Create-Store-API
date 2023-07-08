@@ -21,10 +21,10 @@ const errorHandler = (err, req, res, next) => {
 class CustomError extends Error {
   /**
    * @param {Number} statusCode
-   * @param {String} message
+   * @param {String} messag
    */
   constructor(statusCode, message) {
-    super();
+    super(message);
     this.statusCode = statusCode;
     this.message = message;
   }

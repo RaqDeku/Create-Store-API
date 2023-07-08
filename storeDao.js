@@ -12,7 +12,6 @@ class Database {
     this.db = {
       [this.collection]: dbCusor().collection(this.collection),
     };
-    console.log(this.collection);
   }
   /**
    * Methods for Creating and Modifing A Store
@@ -94,18 +93,34 @@ class Database {
   /**
    * @param {String} id - Store or Product Id
    * @param {Object} review - Customer Review Document
+   * @returns {Promise<Array>} - Reviews Available
    */
   async addReview(id, review) {
-    await this.db.reviews.insertOne({
-      _id: new ObjectId(id),
-      reviews: [review],
-    });
-    return;
+    try {
+      let reviewDoc = await this.db.reviews.updateOne(
+        { _id: new ObjectId(id) },
+        { $push: { reviews: review } }
+      );
+      !reviewDoc &&
+        (await this.db.reviews.insertOne({
+          _id: new ObjectId(id),
+          reviews: [review],
+        }));
+      return await this.getReviews(id);
+    } catch (error) {
+      throw error;
+    }
   }
 
-  async getReviews(storeId) {
-    let reviewArray = [];
-    let reviews = this.db.reviews.find({ _id: new ObjectId(storeId) });
+  /**
+   * @param {String} id - Store or Product Id
+   * @returns {Promise} - Reviews Document
+   */
+  async getReviews(id) {
+    try {
+      let reviewsDoc = this.db.reviews.findOne({ _id: new ObjectId(id) });
+      return reviewsDoc;
+    } catch (error) {}
   }
   /**
    * @param {String} userId - User Id
@@ -116,7 +131,7 @@ class Database {
       let user = await this.db.users.findOne({ _id: new ObjectId(userId) });
       return user;
     } catch (error) {
-      console.error(error);
+      throw error;
     }
   }
 
